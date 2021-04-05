@@ -1,42 +1,40 @@
-# Frontend template
+## :pushpin: BookLovers
 
-This is a simple react/redux/jwt template to start a project quickly
+:green_book: BookLovers is an app where you can find your favourite books, added them in your book shelves, read it and keep in track your progress.
 
-## Table of contents:
+This project retrieved from Goodreads with less features and different functions.
 
-- **[Setup](#setup-how-to-use-this-template)**
-- **[Create React App docs](#cra-docs)**
+This product can help you:
 
-## SETUP How to use this template
+- Organize your books
+- Find the best books based on your interests.
+- Find your favourite author book.
+- Select your new adventure with more information.
 
-1. Create a new project based on this template using the `Use this template` button
+## Technologies and concepts I used in this project
 
-![HOW_TO_USE](https://user-images.githubusercontent.com/20372832/77003323-70966180-695d-11ea-8abe-b362d57135f3.gif)
+- ReactJs
+- Redux
+- Express
+- REST API
+- Sequelize as ORM
+- One-to-many models
+- Many-to-many models
 
-2. Clone the app
+## I'm learning in this project:
 
-```
-git clone git@github.com:YOUR_GITHUB_NAME/YOUR_PROJECT_NAME.git
-```
+-
+-
 
-3. cd into your project
+## User Story
 
-```
-cd YOUR_PROJECT_NAME
-```
+- As a user I want to be able to log in.
+- As a user I want to be able to create an account.
 
-4. install dependencies
+## :point_right: [Frontend Board](https://github.com/users/tizhad/projects/1?add_cards_query=is%3Aopen)
 
-```
-npm install
-```
+## :point_right: [Wireframe](https://drive.google.com/file/d/1SSvvRhRBsTNx9HkeA0UHBpe0XTeoo6YD/view?usp=sharing)
 
-5. Start development server with npm start
+## :point_right: [Database Model](https://drive.google.com/file/d/1A-vn1nGsodsBWBGkd6v11rQV0HUUAEAe/view?usp=sharing)
 
-```
-npm start
-```
-
-## CRA docs
-
-The normal Create React App docs can be found in [CRA_DOCS.md](./CRA_DOCS.md)
+## :point_right: [Backend repo](https://github.com/tizhad/booklovers-backend)

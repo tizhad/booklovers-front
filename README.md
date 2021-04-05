@@ -33,7 +33,7 @@ This product can help you:
 
 ## :point_right: [Frontend Board](https://github.com/users/tizhad/projects/1?add_cards_query=is%3Aopen)
 
-## :point_right: [Wireframe](https://drive.google.com/file/d/1SSvvRhRBsTNx9HkeA0UHBpe0XTeoo6YD/view?usp=sharing)
+## :point_right: [Wireframe](https://drive.google.com/file/d/1k1H58RcqBc14WwlZSRYdqtX5A8nvY8Yw/view?usp=sharing)
 
 ## :point_right: [Database Model](https://drive.google.com/file/d/1A-vn1nGsodsBWBGkd6v11rQV0HUUAEAe/view?usp=sharing)
 

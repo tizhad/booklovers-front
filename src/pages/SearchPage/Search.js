@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import "./Search.css";
 import { useState } from "react";
 
 const SearchPage = (props) => {
@@ -38,7 +39,18 @@ const SearchPage = (props) => {
       </div>
       <div>
         {results.map((result) => {
-          return <h2>{result.volumeInfo.title}</h2>;
+          return (
+            <div className="searchResult">
+              <img
+                alt={result.volumeInfo.title}
+                src={result.volumeInfo.imageLinks.smallThumbnail}
+              ></img>
+              <h2>{result.volumeInfo.title}</h2>{" "}
+              <p>{result.volumeInfo.authors}</p>
+              <p>{result.volumeInfo.description}</p>
+              <p>{result.volumeInfo.averageRating}</p>
+            </div>
+          );
         })}
       </div>
     </div>

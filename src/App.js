@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
 import { Jumbotron } from "react-bootstrap";
-import Search from "./pages/Search";
+import Search from "./pages/SearchPage/Search";
 
 const Home = () => (
   <Jumbotron>

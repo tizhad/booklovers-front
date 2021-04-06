@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Search.css";
 import { useState } from "react";
 
-const SearchPage = (props) => {
+const SearchPage = () => {
   const [results, setResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -11,9 +11,9 @@ const SearchPage = (props) => {
     const res = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`
     );
-    console.log("res", res);
+    // console.log("res", res);
     setResults(res.data.items);
-    console.log("res data", res.data);
+    // console.log("res data", res.data);
 
     setSearchTerm(searchTerm);
   }
@@ -40,15 +40,15 @@ const SearchPage = (props) => {
       <div>
         {results.map((result) => {
           return (
-            <div className="searchResult">
+            <div className="searchResult" key={result.id}>
               <img
                 alt={result.volumeInfo.title}
                 src={result.volumeInfo.imageLinks.smallThumbnail}
               ></img>
               <h2>{result.volumeInfo.title}</h2>{" "}
               <p>{result.volumeInfo.authors}</p>
-              <p>{result.volumeInfo.description}</p>
               <p>{result.volumeInfo.averageRating}</p>
+              <p>{result.volumeInfo.description}</p>
             </div>
           );
         })}

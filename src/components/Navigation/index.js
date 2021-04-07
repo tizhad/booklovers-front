@@ -14,7 +14,7 @@ export default function Navigation() {
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light">
       <Navbar.Brand as={NavLink} to="/">
         Book Lovers
       </Navbar.Brand>
@@ -23,6 +23,7 @@ export default function Navigation() {
         <Nav style={{ width: "100%" }} fill>
           <NavbarItem path="/" linkText="Home" />
           <NavbarItem path="/my-books" linkText="My Books" />
+          <NavbarItem path="/search" linkText="Search" />
           {loginLogoutControls}
         </Nav>
       </Navbar.Collapse>

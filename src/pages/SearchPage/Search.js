@@ -11,21 +11,28 @@ const SearchPage = () => {
     const res = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`
     );
-    // console.log("res", res);
-    setResults(res.data.items);
-    // console.log("res data", res.data);
+
+    const englishResults = res.data.items.filter((result) => {
+      if (result.volumeInfo.language === "en") {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    setResults(englishResults);
+    console.log(englishResults);
 
     setSearchTerm(searchTerm);
   }
-
   const onSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
   return (
     <div>
-      <div>
+      <div className="input">
         <label> Search your books</label>
+        <br />
         <br />
         <input
           className="searchInput"
@@ -37,18 +44,23 @@ const SearchPage = () => {
         />
         <button onClick={getResults}> search</button>
       </div>
-      <div>
+      <div className="container">
         {results.map((result) => {
           return (
             <div className="searchResult" key={result.id}>
               <img
                 alt={result.volumeInfo.title}
-                src={result.volumeInfo.imageLinks.smallThumbnail}
+                src={
+                  result.volumeInfo.imageLinks.smallThumbnail ||
+                  "https://via.placeholder.com/150"
+                }
               ></img>
-              <h2>{result.volumeInfo.title}</h2>{" "}
+              <h1>{result.title}</h1>
               <p>{result.volumeInfo.authors}</p>
+              <p>{result.volumeInfo.language}</p>
               <p>{result.volumeInfo.averageRating}</p>
-              <p>{result.volumeInfo.description}</p>
+              {/* <p>{result.volumeInfo.description}</p> */}
+              <button className="button">Want to read</button>
             </div>
           );
         })}

@@ -52,7 +52,7 @@ export const signUp = (name, email, password) => {
   };
 };
 
-export const login = (email, password) => {
+export const login = (email, password         ) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
@@ -112,11 +112,14 @@ export const getUserWithStoredToken = () => {
 
 export const createBook = (bookInfo) => {
   return async (dispatch, getState) => {
+    const token = selectToken(getState());
+
     dispatch(appLoading());
     try {
-      const response = await axios.post(`${apiUrl}/books`, bookInfo);
+      const headers = { headers: { Authorization: `Bearer ${token}` } };
 
-      dispatch(loginSuccess(response.data));
+      await axios.post(`${apiUrl}/books`, bookInfo, headers);
+
       dispatch(
         showMessageWithTimeout("success", true, "book added to your book list ")
       );

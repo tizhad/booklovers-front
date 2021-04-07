@@ -2,31 +2,45 @@ import React from "react";
 import axios from "axios";
 import "./Search.css";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createBook } from "../../store/user/actions";
 
 const SearchPage = () => {
-  const [results, setResults] = useState([]);
+  const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const dispatch = useDispatch();
+  // const [bookStatus, setBookStatus] = useState("");
 
-  async function getResults() {
+  async function getBooks() {
     const res = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`
     );
 
-    const englishResults = res.data.items.filter((result) => {
-      if (result.volumeInfo.language === "en") {
+    const englishResults = res.data.items.filter((book) => {
+      if (book.volumeInfo.language === "en") {
         return true;
       } else {
         return false;
       }
     });
-    setResults(englishResults);
-    console.log(englishResults);
 
+    setBooks(englishResults);
     setSearchTerm(searchTerm);
   }
   const onSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
   };
+
+  function addToBooks(book) {
+    const bookInfo = {
+      uniqueId: book.id,
+      title: book.volumeInfo.title,
+      imageURL: book.volumeInfo.imageLinks.thumbnail,
+      description: book.volumeInfo.description,
+    };
+    console.log(bookInfo);
+    dispatch(createBook(bookInfo));
+  }
 
   return (
     <div>
@@ -42,25 +56,27 @@ const SearchPage = () => {
           placeholder="Search books"
           onChange={onSearchTermChange}
         />
-        <button onClick={getResults}> search</button>
+        <button onClick={getBooks}> search</button>
       </div>
       <div className="container">
-        {results.map((result) => {
+        {books.map((book) => {
           return (
-            <div className="searchResult" key={result.id}>
+            <div className="searchResult" key={book.id}>
               <img
-                alt={result.volumeInfo.title}
+                alt={book.volumeInfo.title}
                 src={
-                  result.volumeInfo.imageLinks.smallThumbnail ||
+                  book.volumeInfo.imageLinks.smallThumbnail ||
                   "https://via.placeholder.com/150"
                 }
               ></img>
-              <h1>{result.title}</h1>
-              <p>{result.volumeInfo.authors}</p>
-              <p>{result.volumeInfo.language}</p>
-              <p>{result.volumeInfo.averageRating}</p>
-              {/* <p>{result.volumeInfo.description}</p> */}
-              <button className="button">Want to read</button>
+              <h1>{book.title}</h1>
+              <p>{book.volumeInfo.authors}</p>
+              <p>{book.volumeInfo.language}</p>
+              <p>{book.volumeInfo.averageRating}</p>
+              {/* <p>{book.volumeInfo.description}</p> */}
+              <button className="button" onClick={() => addToBooks(book)}>
+                Want to read
+              </button>
             </div>
           );
         })}

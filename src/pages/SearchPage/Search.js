@@ -4,29 +4,22 @@ import "./Search.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createBook } from "../../store/user/actions";
+import { apiUrl } from "../../config/constants";
 
 const SearchPage = () => {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
-  // const [bookStatus, setBookStatus] = useState("");
+  const token = localStorage.getItem("token");
 
   async function getBooks() {
-    const res = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`
-    );
+    const headers = { headers: { Authorization: `Bearer ${token}` } };
+    const res = await axios.get(`${apiUrl}/search?q=${searchTerm}`, headers);
 
-    const englishResults = res.data.items.filter((book) => {
-      if (book.volumeInfo.language === "en") {
-        return true;
-      } else {
-        return false;
-      }
-    });
-
-    setBooks(englishResults);
     setSearchTerm(searchTerm);
+    setBooks(res.data);
   }
+
   const onSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -61,19 +54,18 @@ const SearchPage = () => {
       <div className="container">
         {books.map((book) => {
           return (
-            <div className="searchResult" key={book.id}>
+            <div className="searchResult" key={book.googleID}>
               <img
-                alt={book.volumeInfo.title}
-                src={
-                  book.volumeInfo.imageLinks.smallThumbnail ||
-                  "https://via.placeholder.com/150"
-                }
+                className="bookSearchImage"
+                alt={book.title}
+                src={book.imageURL || "https://via.placeholder.com/150"}
               ></img>
-              <h1>{book.title}</h1>
-              <p>{book.volumeInfo.authors}</p>
-              <p>{book.volumeInfo.language}</p>
-              <p>{book.volumeInfo.averageRating}</p>
-              {/* <p>{book.volumeInfo.description}</p> */}
+              <h3>{book.title}</h3>
+              {/* <p>{book.volumeInfo.authors}</p> */}
+              <p>{book.rate}</p>
+              <p>{book.description}</p>
+              <p>{book.status}</p>
+              <p>{book.progress}</p>
               <button className="button" onClick={() => addToBooks(book)}>
                 Want to read
               </button>

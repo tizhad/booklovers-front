@@ -26,12 +26,13 @@ const SearchPage = () => {
 
   function addToBooks(book) {
     const bookInfo = {
-      uniqueId: book.id,
-      title: book.volumeInfo.title,
-      imageURL: book.volumeInfo.imageLinks.thumbnail,
-      description: book.volumeInfo.description,
+      googleID: book.googleID,
+      title: book.title,
+      imageURL: book.imageURL || "/placeholder.png",
+      description: book.description,
+      authors: book.authors,
     };
-    console.log(bookInfo);
+    console.log("Book Info: ", bookInfo);
     dispatch(createBook(bookInfo));
   }
 
@@ -58,7 +59,7 @@ const SearchPage = () => {
               <img
                 className="bookSearchImage"
                 alt={book.title}
-                src={book.imageURL || "https://via.placeholder.com/150"}
+                src={book.imageURL || "/placeholder.png"}
               ></img>
               <h3>{book.title}</h3>
               {/* <p>{book.volumeInfo.authors}</p> */}

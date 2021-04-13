@@ -22,7 +22,7 @@ const SearchPage = () => {
 
   async function updateBook(book) {
     console.log("Book Info: ", book);
-    dispatch(createBook(book));
+    await dispatch(createBook(book));
     await getBooks();
   }
 

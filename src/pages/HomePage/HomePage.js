@@ -13,7 +13,6 @@ const HomePage = () => {
   const inProgressBooks = userBooks.filter((book) => {
     return book.status === "reading";
   });
-  console.log("inProgressBooks", inProgressBooks);
 
   useEffect(() => {
     dispatch(getUserBooks());
@@ -35,6 +34,7 @@ const HomePage = () => {
                 title={book.title}
                 authors={book.author}
                 imageURL={book.imageURL}
+                status={book.status}
                 progress={book.progress}
                 onUpdateBook={updateBook}
               />

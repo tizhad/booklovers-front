@@ -1,16 +1,17 @@
 .searchResult{
     display: flex;
-    border: red 2px solid;
     margin-left: 20px;
     margin-top: 10px;
     background-color: rgb(250, 220, 250);
 }
-.container {
+.row {
     display: flex;
-    background-color: rgb(211, 216, 216);
-    flex-direction: column;
-    width: 400px;
-}
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
 
 
 .input{
@@ -20,14 +21,11 @@
     margin-top: 30px;
 
 }
-
-.button {
-    display: flex;
-    background-color: aqua;
-    font-size: medium;
-    height: 30px;
-    align-items:center;
-}
+.buttonStyle {
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+  }
 
 .bookSearchImage {
     width: 200px;

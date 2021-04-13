@@ -1,0 +1,33 @@
+.searchResult{
+    display: flex;
+    margin-left: 20px;
+    margin-top: 10px;
+    background-color: rgb(250, 220, 250);
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+
+.input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+
+}
+.buttonStyle {
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+  }
+
+.bookSearchImage {
+    width: 200px;
+    height: 300px;
+}

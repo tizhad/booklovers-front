@@ -10,7 +10,6 @@ const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
   const searchResults = useSelector(selectSearchResult);
-  // console.log("searchResults: ", searchResults);
 
   const onSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
@@ -21,7 +20,6 @@ const SearchPage = () => {
   }
 
   async function updateBook(book) {
-    console.log("Book Info: ", book);
     await dispatch(createBook(book));
     await getBooks();
   }

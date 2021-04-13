@@ -18,7 +18,6 @@ export const getUserBooks = () => {
     try {
       const headers = { headers: { Authorization: `Bearer ${token}` } };
       const res = await axios.get(`${apiUrl}/userBooks`, headers);
-      console.log("res.data", res.data);
       dispatch(setUserBooks(res.data));
 
       dispatch(showMessageWithTimeout("success", true, "user books fetched"));

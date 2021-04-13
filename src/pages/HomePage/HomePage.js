@@ -35,6 +35,7 @@ const HomePage = () => {
                 authors={book.author}
                 imageURL={book.imageURL}
                 status={book.status}
+                rate={book.rate}
                 progress={book.progress}
                 onUpdateBook={updateBook}
               />

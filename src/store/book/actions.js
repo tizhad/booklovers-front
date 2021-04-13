@@ -18,7 +18,6 @@ export const searchBooks = (searchTerm) => {
     try {
       const headers = { headers: { Authorization: `Bearer ${token}` } };
       const res = await axios.get(`${apiUrl}/search?q=${searchTerm}`, headers);
-      // console.log("res.date", res.data);
 
       dispatch(setSearchResults(res.data));
 

@@ -7,13 +7,12 @@ import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
-// import MyBooks from "./pages/MyBooks";
-// import HomePage from "./pages/HomePage";
-
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
 import Search from "./pages/SearchPage/Search";
+import MyBooks from "./pages/MyBooks/MyBooks";
+import HomePage from "./pages/HomePage/HomePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,11 +28,11 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
-        {/* <Route exact path="/" component={HomePage} /> */}
+        <Route exact path="/" component={HomePage} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/search" component={Search} />
-        {/* <Route path="/my-books" component={MyBooks} /> */}
+        <Route path="/my-books" component={MyBooks} />
       </Switch>
     </div>
   );

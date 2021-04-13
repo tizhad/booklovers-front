@@ -61,11 +61,17 @@ export default function Book(props) {
         <div className="column content-column">
           <h2 className="title">{props.title}</h2>
           <p>By: {props.authors}</p>
-          {/* <p>{props.description}</p> */}
-          <p>{props.rate !== null ? true : false}</p>
-          <p>{props.progress !== null ? true : false}</p>
-          <p>{props.status !== null ? true : false}</p>
-          {props.status === undefined && (
+          {props.description !== undefined && (
+            <p>{props.description.substring(0, 200)}</p>
+          )}
+          {props.rate !== null ? (
+            <p>Rate: {props.rate}</p>
+          ) : (
+            <p>Rate: Unavailable</p>
+          )}
+          {props.progress !== null && <p>Progress: {props.progress}%</p>}
+
+          {(props.status === undefined || props.status === undefined) && (
             <button onClick={addBook}>Want to read</button>
           )}
 

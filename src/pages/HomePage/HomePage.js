@@ -20,6 +20,7 @@ const HomePage = () => {
   const allRandomBooks = randomBooks;
 
   useEffect(() => {
+    dispatch(getUserBooks());
     dispatch(getRandomBooks());
   }, [dispatch]);
 

@@ -26,8 +26,8 @@ const SearchPage = () => {
 
   return (
     <div>
-      <div className="input">
-        <label> Search your book</label>
+      <div>
+        <label className="input"> Search your book</label>
         <br />
         <br />
         <input
@@ -51,7 +51,6 @@ const SearchPage = () => {
                 imageURL={book.imageURL}
                 rate={book.rate}
                 status={book.status}
-                progress={book.progress}
                 description={book.description}
                 onUpdateBook={updateBook}
               />

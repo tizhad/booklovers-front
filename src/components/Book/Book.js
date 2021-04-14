@@ -1,7 +1,9 @@
 import "./Book.css";
 import React from "react";
+import { useState } from "react";
 
 export default function Book(props) {
+  const [newProgress, setNewProgress] = useState(props.progress);
   function addBook() {
     props.onUpdateBook({
       googleID: props.googleID,
@@ -36,11 +38,16 @@ export default function Book(props) {
     });
   }
 
-  function updateProgress(progress) {
-    let status = "reading";
-    if (progress === 100) {
+  const onSubmitForm = (event) => {
+    event.preventDefault();
+  };
+  const updateProgress = () => {
+    let progress = newProgress;
+    let status = props.status;
+    if (progress == 100) {
       status = "read";
     }
+    console.log("status", status);
     props.onUpdateBook({
       googleID: props.googleID,
       title: props.title,
@@ -50,41 +57,64 @@ export default function Book(props) {
       status: status,
       progress: progress,
     });
-  }
+  };
 
   return (
-    <div className="wrapper">
-      <div className="row">
-        <div className="column image-column">
-          <img className="imageStyle" src={props.imageURL} alt={props.title} />
-        </div>
-        <div className="column content-column">
-          <h2 className="title">{props.title}</h2>
-          <p>By: {props.authors}</p>
-          {props.description !== undefined && (
-            <p>{props.description.substring(0, 200)}</p>
-          )}
-          {props.rate !== null ? (
-            <p>Rate: {props.rate}</p>
-          ) : (
-            <p>Rate: Unavailable</p>
-          )}
-          {props.progress !== null && <p>Progress: {props.progress}%</p>}
+    <div className="book">
+      <div className="book-row">
+        <div className="book-column">
+          <img className="book-image" src={props.imageURL} alt={props.title} />
 
-          {(props.status === undefined || props.status === undefined) && (
-            <button onClick={addBook}>Want to read</button>
+          {props.status === undefined && (
+            <button className="book-button" onClick={addBook}>
+              Want to read
+            </button>
           )}
 
           {props.status === "to-read" && (
-            <button onClick={startBook}>Start reading</button>
+            <button className="book-button" onClick={startBook}>
+              Start reading
+            </button>
           )}
-
           {props.status === "reading" && (
-            <button onClick={finishBook}>Done</button>
+            <div>
+              <form onSubmit={onSubmitForm}>
+                <input
+                  className="input"
+                  type="number"
+                  name="progress"
+                  placeholder="e.g. 20"
+                  onChange={(event) => setNewProgress(event.target.value)}
+                />
+                <button className="update-button" onClick={updateProgress}>
+                  update
+                </button>
+              </form>
+            </div>
+          )}
+          {props.status === "reading" && (
+            <button className="book-button" onClick={finishBook}>
+              Finished!
+            </button>
+          )}
+        </div>
+        <div className="book-column">
+          <h4>{props.title}</h4>
+          <p>By: {props.authors}</p>
+          {props.progress >= 0 && props.progress !== null ? (
+            <progress value={props.progress} max="100"></progress>
+          ) : (
+            <p></p>
           )}
 
-          {props.status === "read" && (
-            <p>Congrats! You've already read this book.</p>
+          {props.description !== undefined && (
+            <p className="">{props.description.substring(0, 200)}</p>
+          )}
+
+          {props.rate !== null ? (
+            <p className="">Rate: {props.rate}</p>
+          ) : (
+            <p className=""></p>
           )}
         </div>
       </div>

@@ -1,28 +1,26 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUserBooks } from "../../store/userBook/selectors";
 import { getUserBooks } from "../../store/userBook/actions";
-import { createBook } from "../../store/book/actions";
+import { selectUserBooks } from "../../store/userBook/selectors";
+import { selectRandomBooks } from "../../store/book/selectors";
+import { createBook, getRandomBooks } from "../../store/book/actions";
 import Book from "../../components/Book/Book";
 import "./HomePage.css";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const userBooks = useSelector(selectUserBooks);
+  const randomBooks = useSelector(selectRandomBooks);
 
   const inProgressBooks = userBooks.filter((book) => {
     return book.status === "reading";
   });
 
-
-  const randomBooksQuery = []
-  const randomBooks = userBooks.filter((book) => {
-    return book.status === "to-read" && book.progress === null;
-  });
+  const allRandomBooks = randomBooks;
 
   useEffect(() => {
-    dispatch(getUserBooks());
+    dispatch(getRandomBooks());
   }, [dispatch]);
 
   async function updateBook(book) {
@@ -62,14 +60,14 @@ const HomePage = () => {
         </span>{" "}
         Random Books for you!{" "}
       </p>
-      {/* <div className="container2">
-        {randomBooks.map((book) => {
+      <div className="container2">
+        {allRandomBooks.map((book) => {
           return (
             <Book
               key={book.googleID}
               googleID={book.googleID}
               title={book.title}
-              authors={book.author}
+              authors={book.authors}
               imageURL={book.imageURL}
               rate={book.rate}
               status={book.status}
@@ -79,7 +77,7 @@ const HomePage = () => {
             />
           );
         })}
-      </div> */}
+      </div>
     </div>
   );
 };

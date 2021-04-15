@@ -5,10 +5,14 @@
     flex-wrap: wrap;
     margin-bottom: 30px;
     margin-top: 20px;
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
+    color: rgb(252, 252, 252);
     justify-content: center;
     align-items: center;
-    background-color: rgb(244, 249, 250);
+    background-color: rgb(50, 73, 57);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 .subTitles {
@@ -18,4 +22,10 @@
     width: 300px;
     margin: 0 auto;
     font-variant: small-caps;
+}
+
+.randomBooks {
+    color: rgb(250, 252, 255);
+    background-image: url("Webp.net-resizeimage.jpg");
+    opacity: 10;
 }

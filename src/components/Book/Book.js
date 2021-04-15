@@ -76,6 +76,21 @@ export default function Book(props) {
               Start reading
             </button>
           )}
+
+          {props.status === "reading" && (
+            <button className="book-button" onClick={finishBook}>
+              Finished!
+            </button>
+          )}
+        </div>
+        <div className="book-column">
+          <p className="p">{props.title}</p>
+          <p>By: {props.authors}</p>
+          {props.progress >= 0 && props.progress !== null ? (
+            <progress value={props.progress} max="100"></progress>
+          ) : (
+            <p></p>
+          )}
           {props.status === "reading" && (
             <div>
               <form onSubmit={onSubmitForm}>
@@ -92,23 +107,9 @@ export default function Book(props) {
               </form>
             </div>
           )}
-          {props.status === "reading" && (
-            <button className="book-button" onClick={finishBook}>
-              Finished!
-            </button>
-          )}
-        </div>
-        <div className="book-column">
-          <h4>{props.title}</h4>
-          <p>By: {props.authors}</p>
-          {props.progress >= 0 && props.progress !== null ? (
-            <progress value={props.progress} max="100"></progress>
-          ) : (
-            <p></p>
-          )}
 
           {props.description !== undefined && (
-            <p className="">{props.description.substring(0, 200)}</p>
+            <p className="description">{props.description.substring(0, 200)}</p>
           )}
 
           {props.rate !== null ? (

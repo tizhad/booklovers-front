@@ -1,13 +1,15 @@
 .book {
-  padding: 10px;
+  padding: 5px;
   line-height: 1.2 px;
+  width: 370px;
+  margin-left: 2px;
 }
 
 .book-row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
+  width: 64%;
   line-height: 1.2 px;
 
 }
@@ -18,7 +20,7 @@
   flex-basis: 100%;
   flex: 1;
   font-size: 13px;
-  width: 200px;
+  width: 300px;
 }
 
 .book-image {
@@ -29,14 +31,14 @@
 .book-button {
   background-color: #98ddca;
   border-radius: 4%;
-  border: #98ddca;
+  border: #34158a;
   font-family: sohne;
   font-size: 16px;
   letter-spacing: 0;
   font-style: normal;
   font-weight: 400;
   color: rgb(8, 8, 8);
-  width: 100px;
+  width: 95px;
   margin-top: 5px;
   margin-bottom: 10px;
 }
@@ -49,19 +51,42 @@
 }
 
 .input {
-  width: 80px;
+  width: 50px;
   height: 20px;
   background-color: #f0eaea;
   color: rgb(9, 27, 13);
-  margin: 8px 0;
+  margin-left: 32px;
+  margin-top: 5px;
+  margin-bottom: 3px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .update-button {
-  border-radius: 4px;
+  border-radius: 2px;
   border: none;
   align-items: center;
-  margin-left: 12px;
+  margin-left: 10px;
+  margin-bottom: 3px;
+  width: 100px;
+}
+
+.p {
+  font-size: 17px;
+  color: rgb(245, 248, 248);
+  font-family: sohne;
+  letter-spacing: 0;
+  font-style: normal;
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.description {
+  font-family: sohne;
+  letter-spacing: 0;
+  font-style: normal;
+  font-weight: 300;
+  margin-bottom: 3px;
+  width: 300px;
 }

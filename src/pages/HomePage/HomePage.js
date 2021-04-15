@@ -17,7 +17,9 @@ const HomePage = () => {
     return book.status === "reading";
   });
 
-  const allRandomBooks = randomBooks;
+  const allRandomBooks = randomBooks.filter((book) => {
+    return book.author !== null && book.description !== null;
+  });
 
   useEffect(() => {
     dispatch(getUserBooks());
@@ -61,7 +63,7 @@ const HomePage = () => {
         </span>{" "}
         Random Books for you!{" "}
       </p>
-      <div className="container2">
+      <div className="randomBooks container2">
         {allRandomBooks.map((book) => {
           return (
             <Book

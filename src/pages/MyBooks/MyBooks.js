@@ -31,13 +31,13 @@ const MyBooks = () => {
 
   return (
     <div>
-      <p className="subTitles">
+      <p className="subTitles-myBook">
         <span role="img" aria-label="book">
           &#128214;
         </span>{" "}
         You're reading {inProgressBooks.length} books{" "}
       </p>
-      <div className="container2">
+      <div className="container-myBooks">
         {inProgressBooks.map((book) => {
           return (
             <Book
@@ -55,13 +55,13 @@ const MyBooks = () => {
         })}
         <hr></hr>
       </div>
-      <p className="subTitles">
+      <p className="subTitles-myBook">
         <span role="img" aria-label="book">
           &#128218;
         </span>{" "}
         You finished {FinishedBooks.length} books{" "}
       </p>
-      <div className="container2">
+      <div className="container-myBooks-finished">
         {FinishedBooks.map((book) => {
           return (
             <Book
@@ -79,13 +79,13 @@ const MyBooks = () => {
           );
         })}
       </div>
-      <p className="subTitles">
+      <p className="subTitles-myBook">
         <span role="img" aria-label="book">
           &#128218;
         </span>{" "}
         {notStarted.length} books for starting.
       </p>
-      <div className="container2">
+      <div className="container-myBooks-starting ">
         {notStarted.map((book) => {
           return (
             <div>

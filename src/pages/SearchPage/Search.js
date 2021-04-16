@@ -13,8 +13,14 @@ const SearchPage = () => {
 
   const onSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
+    console.log("searchTerm", searchTerm);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      dispatch(searchBooks(searchTerm));
+    }
+  };
   function getBooks() {
     dispatch(searchBooks(searchTerm));
   }
@@ -26,24 +32,22 @@ const SearchPage = () => {
 
   return (
     <div>
-      <div>
-        <label className="input"> Search your book</label>
-        <br />
-        <br />
+      <div className="search__container">
+        <p className="search__title">Go ahead, hover over search</p>
         <input
-          className="searchInput"
-          type="search"
+          className="search__input"
+          type="text"
           value={searchTerm}
-          name="searchText"
-          placeholder="Search books"
+          name=""
+          placeholder="Search"
           onChange={onSearchTermChange}
+          onKeyDown={handleKeyDown}
         />
-        <button onClick={getBooks}> search</button>
       </div>
-      <div className="container">
+      <div className="container3">
         {searchResults.map((book) => {
           return (
-            <div className="searchResult" key={book.googleID}>
+            <div className="search-result-books" key={book.googleID}>
               <Book
                 googleID={book.googleID}
                 title={book.title}

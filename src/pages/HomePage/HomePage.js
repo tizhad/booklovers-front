@@ -39,7 +39,7 @@ const HomePage = () => {
         </span>{" "}
         You're reading {inProgressBooks.length} books{" "}
       </p>
-      <div className="container2">
+      <div className="container-home">
         {inProgressBooks.map((book) => {
           return (
             <Book
@@ -63,7 +63,7 @@ const HomePage = () => {
         </span>{" "}
         Random Books for you!{" "}
       </p>
-      <div className="randomBooks container2">
+      <div className="container-home">
         {allRandomBooks.map((book) => {
           return (
             <Book

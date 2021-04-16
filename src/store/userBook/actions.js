@@ -1,12 +1,7 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
 import { selectToken } from "../user/selectors";
-import {
-  appLoading,
-  appDoneLoading,
-  showMessageWithTimeout,
-  setMessage,
-} from "../appState/actions";
+import { appLoading, appDoneLoading, setMessage } from "../appState/actions";
 
 export const SET_USER_BOOKS = "SET_USER_BOOKS";
 
@@ -19,8 +14,6 @@ export const getUserBooks = () => {
       const headers = { headers: { Authorization: `Bearer ${token}` } };
       const res = await axios.get(`${apiUrl}/userBooks`, headers);
       dispatch(setUserBooks(res.data));
-
-      dispatch(showMessageWithTimeout("success", true, "user books fetched"));
 
       dispatch(appDoneLoading());
     } catch (error) {

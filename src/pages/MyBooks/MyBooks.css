@@ -1,18 +1,54 @@
-.container2 {
+.container-myBooks {
+    width: 900px;
+    margin: 0 auto;
     display: flex;
+    flex-grow: 4;
     flex-direction: row;
-    align-content: flex-start;
     flex-wrap: wrap;
-    margin-bottom: 30px;
-    margin-top: 20px;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(244, 249, 250);
+    width: 90%;
+    /* background-color: #b0b1ae57; */
+    border-radius: 10px;
+    background-image: url("book26.jpg");
+    padding-left: 0px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    justify-items: center;
+
 }
 
-.subTitles {
-    color: rgb(48, 106, 93);
+.container-myBooks-finished {
+    width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-grow: 4;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+    background-image: url("book23.jpg");
+    border-radius: 9px;
+    padding-left: 0px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+
+.container-myBooks-starting {
+    width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-grow: 4;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+    background-color: #ecd0d7;
+    border-radius: 10px;
+    padding-left: 0px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.subTitles-myBook {
+    color: rgb(3, 20, 17);
     font-size: 22px;
     margin-top: 20px;
     width: 300px;

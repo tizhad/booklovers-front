@@ -1,6 +1,7 @@
 import "./Book.css";
 import React from "react";
 import { useState } from "react";
+import ShowMore from "react-show-more";
 
 export default function Book(props) {
   const [newProgress, setNewProgress] = useState(props.progress);
@@ -85,7 +86,7 @@ export default function Book(props) {
         </div>
         <div className="book-column">
           <p className="p">{props.title}</p>
-          <p>By: {props.authors}</p>
+          <p className="author">By: {props.authors}</p>
           {props.progress >= 0 && props.progress !== null ? (
             <progress value={props.progress} max="100"></progress>
           ) : (
@@ -98,25 +99,16 @@ export default function Book(props) {
                   className="input"
                   type="number"
                   name="progress"
-                  placeholder="e.g. 20"
+                  placeholder="enter new progress"
                   onChange={(event) => setNewProgress(event.target.value)}
                 />
-                <button className="update-button" onClick={updateProgress}>
-                  update
-                </button>
+                <button onClick={updateProgress}>update </button>
               </form>
             </div>
           )}
-
-          {props.description !== undefined && (
-            <p className="description">{props.description.substring(0, 200)}</p>
-          )}
-
-          {props.rate !== null ? (
-            <p className="">Rate: {props.rate}</p>
-          ) : (
-            <p className=""></p>
-          )}
+          <ShowMore lines={3} more="Show more" less="Show less" anchorClass="">
+            {props.description}
+          </ShowMore>
         </div>
       </div>
     </div>

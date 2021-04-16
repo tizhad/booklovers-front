@@ -1,12 +1,7 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
 import { selectToken } from "../user/selectors";
-import {
-  appLoading,
-  appDoneLoading,
-  showMessageWithTimeout,
-  setMessage,
-} from "../appState/actions";
+import { appLoading, appDoneLoading, setMessage } from "../appState/actions";
 
 export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
 export const SET_RANDOM_BOOKS = "SET_RANDOM_BOOKS";
@@ -88,9 +83,6 @@ export const createBook = (bookInfo) => {
 
       await axios.post(`${apiUrl}/books`, bookInfo, headers);
 
-      dispatch(
-        showMessageWithTimeout("success", true, "book added to your book list ")
-      );
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {

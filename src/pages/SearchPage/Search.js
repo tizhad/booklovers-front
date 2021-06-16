@@ -5,20 +5,27 @@ import { useState } from "react";
 import Book from "../../components/Book/Book";
 import { createBook, searchBooks } from "../../store/book/actions";
 import { selectSearchResult } from "../../store/book/selectors";
+import {
+  Row,
+  Col,
+  Container,
+  Jumbotron,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
 
-const SearchPage = () => {
+export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
   const searchResults = useSelector(selectSearchResult);
 
   const onSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
-    console.log("searchTerm", searchTerm);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      dispatch(searchBooks(searchTerm));
+      dispatch(searchBooks(e.target.value));
     }
   };
   function getBooks() {
@@ -31,25 +38,33 @@ const SearchPage = () => {
   }
 
   return (
-    <div>
-      <div className="search__container">
-        <p className="search__title">Go ahead, hover over search</p>
-        <input
-          className="search__input"
-          type="text"
-          value={searchTerm}
-          name=""
-          placeholder="Search"
-          onChange={onSearchTermChange}
-          onKeyDown={handleKeyDown}
-        />
-      </div>
-      <div className="container3">
+    <Container>
+      <Jumbotron>
+        <Container className="my-5 header">
+          <h1>Go ahead, hover over search</h1>
+        </Container>
+      </Jumbotron>
+      <Row className="py-3">
+        <Col md={6}>
+          <InputGroup className="mb-3">
+            <FormControl
+              placeholder="search"
+              aria-label="search"
+              aria-describedby="basic-addon2"
+              onChange={onSearchTermChange}
+              onKeyDown={handleKeyDown}
+            />
+          </InputGroup>
+        </Col>
+      </Row>
+
+      <Row className="g-3">
         {searchResults.map((book) => {
           return (
-            <div className="search-result-books" key={book.googleID}>
+            <Col md={3} lg={3} sm={6} xs={12} key={book.googleID}>
               <Book
                 googleID={book.googleID}
+                categories={book.categories}
                 title={book.title}
                 authors={book.authors}
                 imageURL={book.imageURL}
@@ -58,12 +73,10 @@ const SearchPage = () => {
                 description={book.description}
                 onUpdateBook={updateBook}
               />
-            </div>
+            </Col>
           );
         })}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
-};
-
-export default SearchPage;
+}

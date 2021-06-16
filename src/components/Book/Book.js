@@ -12,6 +12,7 @@ export default function Book(props) {
       imageURL: props.imageURL,
       authors: props.authors,
       description: props.description,
+      categories: props.categories,
     });
   }
 
@@ -19,6 +20,7 @@ export default function Book(props) {
     props.onUpdateBook({
       googleID: props.googleID,
       title: props.title,
+      categories: props.categories,
       imageURL: props.imageURL,
       authors: props.authors,
       description: props.description,
@@ -30,6 +32,7 @@ export default function Book(props) {
   function finishBook() {
     props.onUpdateBook({
       googleID: props.googleID,
+      categories: props.categories,
       title: props.title,
       imageURL: props.imageURL,
       authors: props.authors,
@@ -48,9 +51,9 @@ export default function Book(props) {
     if (progress == 100) {
       status = "read";
     }
-    console.log("status", status);
     props.onUpdateBook({
       googleID: props.googleID,
+      categories: props.categories,
       title: props.title,
       imageURL: props.imageURL,
       authors: props.authors,
@@ -87,6 +90,12 @@ export default function Book(props) {
         <div className="book-column">
           <p className="p">{props.title}</p>
           <p className="author">By: {props.authors}</p>
+          <p className="author">
+            Category:
+            {props.categories === undefined || props.categories === null
+              ? "Unknown"
+              : props.categories}
+          </p>
           {props.progress >= 0 && props.progress !== null ? (
             <progress value={props.progress} max="100"></progress>
           ) : (

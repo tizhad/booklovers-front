@@ -2,28 +2,24 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserBooks } from "../../store/userBook/actions";
+import { getSuggestions } from "../../store/book/actions";
 import { selectUserBooks } from "../../store/userBook/selectors";
-import { selectRandomBooks } from "../../store/book/selectors";
-import { createBook, getRandomBooks } from "../../store/book/actions";
+import { selectSuggestions } from "../../store/book/selectors";
+import { createBook } from "../../store/book/actions";
 import Book from "../../components/Book/Book";
 import "./HomePage.css";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const userBooks = useSelector(selectUserBooks);
-  const randomBooks = useSelector(selectRandomBooks);
-
+  const suggestions = useSelector(selectSuggestions);
   const inProgressBooks = userBooks.filter((book) => {
     return book.status === "reading";
   });
 
-  const allRandomBooks = randomBooks.filter((book) => {
-    return book.author !== null && book.description !== null;
-  });
-
   useEffect(() => {
     dispatch(getUserBooks());
-    dispatch(getRandomBooks());
+    dispatch(getSuggestions());
   }, [dispatch]);
 
   async function updateBook(book) {
@@ -51,6 +47,7 @@ const HomePage = () => {
               status={book.status}
               rate={book.rate}
               progress={book.progress}
+              categories={book.categories}
               onUpdateBook={updateBook}
             />
           );
@@ -64,17 +61,17 @@ const HomePage = () => {
         Random Books for you!{" "}
       </p>
       <div className="container-home">
-        {allRandomBooks.map((book) => {
+        {suggestions.map((book) => {
           return (
             <Book
               key={book.googleID}
               googleID={book.googleID}
+              categories={book.categories}
               title={book.title}
               authors={book.authors}
               imageURL={book.imageURL}
               rate={book.rate}
               status={book.status}
-              progress={book.progress}
               description={book.description}
               onUpdateBook={updateBook}
             />

@@ -42,6 +42,7 @@ const MyBooks = () => {
           return (
             <Book
               key={book.googleID}
+              categories={book.categories}
               googleID={book.googleID}
               title={book.title}
               authors={book.author}
@@ -67,6 +68,7 @@ const MyBooks = () => {
             <Book
               key={book.googleID}
               googleID={book.googleID}
+              categories={book.categories}
               title={book.title}
               authors={book.author}
               imageURL={book.imageURL}
@@ -92,6 +94,7 @@ const MyBooks = () => {
               <Book
                 key={book.googleID}
                 googleID={book.googleID}
+                categories={book.categories}
                 title={book.title}
                 authors={book.author}
                 imageURL={book.imageURL}

@@ -34,16 +34,11 @@ export const searchBooks = (searchTerm) => {
 export const getAllUserBooks = () => {
   return async (dispatch, getState) => {
     const token = selectToken(getState());
-    // let randomQuery =
-    // randomQueries[Math.floor(Math.random() * randomQueries.length)];
-
-    // console.log("randomQuery", randomQuery);
 
     dispatch(appLoading());
     try {
       const headers = { headers: { Authorization: `Bearer ${token}` } };
       const res = await axios.get(apiUrl, headers);
-      // dispatch(setRandomBooks(res.data));
       console.log("res.data:", res.data);
     } catch (error) {
       if (error.response) {

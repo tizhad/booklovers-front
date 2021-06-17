@@ -10,16 +10,24 @@ import { Container, Row, Col } from "react-bootstrap";
 const MyBooks = () => {
   const dispatch = useDispatch();
   const userBooks = useSelector(selectUserBooks);
+
+  //In-progress books
   const inProgressBooks = userBooks.filter((book) => {
     return book.status === "reading";
   });
+
+  //Finished books
   const FinishedBooks = userBooks.filter((book) => {
     return book.status === "read";
   });
+
+  //ot-started books
+
   const notStarted = userBooks.filter((book) => {
     return book.status === "to-read";
   });
 
+  // get all users books
   useEffect(() => {
     dispatch(getUserBooks());
   }, [dispatch]);

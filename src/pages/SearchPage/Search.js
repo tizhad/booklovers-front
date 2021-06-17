@@ -19,10 +19,12 @@ export default function SearchPage() {
   const dispatch = useDispatch();
   const searchResults = useSelector(selectSearchResult);
 
+  // On search term changed
   const onSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
+  // Handle Enter keyboard
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       dispatch(searchBooks(e.target.value));

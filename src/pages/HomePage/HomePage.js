@@ -13,15 +13,18 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const userBooks = useSelector(selectUserBooks);
   const suggestions = useSelector(selectSuggestions);
+
+  //in-Progress books
   const inProgressBooks = userBooks.filter((book) => {
     return book.status === "reading";
   });
-
+  // GEt books and suggestions after every render
   useEffect(() => {
     dispatch(getUserBooks());
     dispatch(getSuggestions());
   }, [dispatch]);
 
+  // Update a book
   async function updateBook(book) {
     await dispatch(createBook(book));
     await dispatch(getUserBooks());

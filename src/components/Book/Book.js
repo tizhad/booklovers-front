@@ -2,17 +2,12 @@ import "./Book.css";
 import React from "react";
 import { useState } from "react";
 // import ShowMore from "react-show-more";
-import {
-  Button,
-  ProgressBar,
-  Card,
-  FormControl,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Button, ProgressBar, Card, FormControl } from "react-bootstrap";
 
 export default function Book(props) {
-  const [newProgress, setNewProgress] = useState();
+  const [newProgress, setNewProgress] = useState(props.progress);
+
+  //add book
   function addBook() {
     props.onUpdateBook({
       googleID: props.googleID,
@@ -23,6 +18,8 @@ export default function Book(props) {
       categories: props.categories,
     });
   }
+
+  // Update a book
 
   function startBook() {
     props.onUpdateBook({
@@ -37,6 +34,7 @@ export default function Book(props) {
     });
   }
 
+  // Finish a book
   function finishBook() {
     props.onUpdateBook({
       googleID: props.googleID,
@@ -50,6 +48,7 @@ export default function Book(props) {
     });
   }
 
+  //Update a book progress
   const updateProgress = () => {
     let progress = newProgress;
     let status = props.status;
@@ -66,14 +65,12 @@ export default function Book(props) {
       status: status,
       progress: progress,
     });
-    //reset form after submit
-    setNewProgress();
   };
 
   return (
-    <Card className="h-100 my-2 shadow p-3 bg-white rounded">
+    <Card className="h-100 my-2 shadow p-1 bg-grey ">
       <Card.Img variant="top" src={props.imageURL} className="card-img-top" />
-      <Card.Body>
+      <Card.Body className="p-2 overflow-auto">
         <Card.Text>{props.title}</Card.Text>
         <Card.Text>By: {props.authors}</Card.Text>
         <Card.Text>
@@ -86,14 +83,18 @@ export default function Book(props) {
         {props.progress >= 0 && props.progress !== null ? (
           <ProgressBar now={props.progress} className="my-1"></ProgressBar>
         ) : (
-          <p></p>
+          <p> </p>
         )}
-        <FormControl
-          placeholder="new progress"
-          aria-label="progress"
-          type="number"
-          onChange={(event) => setNewProgress(event.target.value)}
-        />
+        {props.status === "reading" ? (
+          <FormControl
+            placeholder="%"
+            aria-label="progress"
+            type="number"
+            onChange={(event) => setNewProgress(event.target.value)}
+          />
+        ) : (
+          <p> </p>
+        )}
 
         {props.status === "reading" && (
           <Button onClick={updateProgress} className="mx-1 my-2">

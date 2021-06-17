@@ -7,7 +7,7 @@ import { selectUserBooks } from "../../store/userBook/selectors";
 import { selectSuggestions } from "../../store/book/selectors";
 import { createBook } from "../../store/book/actions";
 import Book from "../../components/Book/Book";
-import "./HomePage.css";
+import { Container, Row, Col } from "react-bootstrap";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -28,16 +28,23 @@ const HomePage = () => {
   }
 
   return (
-    <div>
-      <p className="subTitles">
-        <span role="img" aria-label="book">
-          &#128214;
-        </span>{" "}
-        You're reading {inProgressBooks.length} books{" "}
-      </p>
-      <div className="container-home">
-        {inProgressBooks.map((book) => {
-          return (
+    <Container>
+      <Row>
+        <h1 className=" my-3 h-color">
+          {" "}
+          You're reading {inProgressBooks.length} books
+        </h1>
+      </Row>
+      <Row className="g-2 ">
+        {inProgressBooks.map((book) => (
+          <Col
+            md={4}
+            lg={3}
+            sm={6}
+            xs={12}
+            className=" my-1"
+            key={book.googleID}
+          >
             <Book
               key={book.googleID}
               googleID={book.googleID}
@@ -50,19 +57,22 @@ const HomePage = () => {
               categories={book.categories}
               onUpdateBook={updateBook}
             />
-          );
-        })}
-        <hr></hr>
-      </div>
-      <p className="subTitles">
-        <span role="img" aria-label="book">
-          &#128218;
-        </span>{" "}
-        Random Books for you!{" "}
-      </p>
-      <div className="container-home">
-        {suggestions.map((book) => {
-          return (
+          </Col>
+        ))}
+      </Row>
+      <Row>
+        <h1 className=" my-3 h-color">Book Lovers suggestions for you</h1>
+      </Row>
+      <Row className="g-2">
+        {suggestions.map((book) => (
+          <Col
+            md={4}
+            lg={3}
+            sm={6}
+            xs={12}
+            className=" my-1"
+            key={book.googleID}
+          >
             <Book
               key={book.googleID}
               googleID={book.googleID}
@@ -75,10 +85,10 @@ const HomePage = () => {
               description={book.description}
               onUpdateBook={updateBook}
             />
-          );
-        })}
-      </div>
-    </div>
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 };
 

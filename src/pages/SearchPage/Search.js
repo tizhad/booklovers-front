@@ -61,7 +61,14 @@ export default function SearchPage() {
       <Row className="g-3">
         {searchResults.map((book) => {
           return (
-            <Col md={3} lg={3} sm={6} xs={12} key={book.googleID}>
+            <Col
+              md={4}
+              lg={3}
+              sm={6}
+              xs={12}
+              className="my-1"
+              key={book.googleID}
+            >
               <Book
                 googleID={book.googleID}
                 categories={book.categories}

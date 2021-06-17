@@ -2,3 +2,17 @@
     color: black;
     text-align: center;
 }
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+.h-color {
+    color: rgb(63, 3, 71);
+    background-color: aliceblue;
+    font-style: italic;
+
+
+}

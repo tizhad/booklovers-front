@@ -5,7 +5,7 @@ import { selectUserBooks } from "../../store/userBook/selectors";
 import { getUserBooks } from "../../store/userBook/actions";
 import { createBook } from "../../store/book/actions";
 import Book from "../../components/Book/Book";
-import "./MyBooks.css";
+import { Container, Row, Col } from "react-bootstrap";
 
 const MyBooks = () => {
   const dispatch = useDispatch();
@@ -30,16 +30,15 @@ const MyBooks = () => {
   }
 
   return (
-    <div>
-      <p className="subTitles-myBook">
-        <span role="img" aria-label="book">
-          &#128214;
-        </span>{" "}
-        You're reading {inProgressBooks.length} books{" "}
-      </p>
-      <div className="container-myBooks">
-        {inProgressBooks.map((book) => {
-          return (
+    <Container>
+      <Row>
+        <h1 className="h-color">
+          You're reading {inProgressBooks.length} books
+        </h1>
+      </Row>
+      <Row className="g-2">
+        {inProgressBooks.map((book) => (
+          <Col md={4} lg={3} sm={6} xs={12} key={book.googleID}>
             <Book
               key={book.googleID}
               categories={book.categories}
@@ -52,19 +51,15 @@ const MyBooks = () => {
               progress={book.progress}
               onUpdateBook={updateBook}
             />
-          );
-        })}
-        <hr></hr>
-      </div>
-      <p className="subTitles-myBook">
-        <span role="img" aria-label="book">
-          &#128218;
-        </span>{" "}
-        You finished {FinishedBooks.length} books{" "}
-      </p>
-      <div className="container-myBooks-finished">
-        {FinishedBooks.map((book) => {
-          return (
+          </Col>
+        ))}
+      </Row>
+      <Row>
+        <h2 className="h-color">You finished {FinishedBooks.length} books </h2>
+      </Row>
+      <Row className="g-2">
+        {FinishedBooks.map((book) => (
+          <Col md={4} lg={3} sm={6} xs={12} key={book.googleID}>
             <Book
               key={book.googleID}
               googleID={book.googleID}
@@ -78,37 +73,39 @@ const MyBooks = () => {
               description={book.description}
               onUpdateBook={updateBook}
             />
-          );
-        })}
-      </div>
-      <p className="subTitles-myBook">
-        <span role="img" aria-label="book">
-          &#128218;
-        </span>{" "}
-        {notStarted.length} books for starting.
-      </p>
-      <div className="container-myBooks-starting ">
-        {notStarted.map((book) => {
-          return (
-            <div>
-              <Book
-                key={book.googleID}
-                googleID={book.googleID}
-                categories={book.categories}
-                title={book.title}
-                authors={book.author}
-                imageURL={book.imageURL}
-                rate={book.rate}
-                status={book.status}
-                progress={book.progress}
-                description={book.description}
-                onUpdateBook={updateBook}
-              />
-            </div>
-          );
-        })}
-      </div>
-    </div>
+          </Col>
+        ))}
+      </Row>
+      <Row>
+        <h1 className="h-color">{notStarted.length} books for starting.</h1>
+      </Row>
+      <Row className="g-2">
+        {notStarted.map((book) => (
+          <Col
+            md={4}
+            lg={3}
+            sm={6}
+            xs={12}
+            key={book.googleID}
+            className="my-1"
+          >
+            <Book
+              key={book.googleID}
+              googleID={book.googleID}
+              categories={book.categories}
+              title={book.title}
+              authors={book.author}
+              imageURL={book.imageURL}
+              rate={book.rate}
+              status={book.status}
+              progress={book.progress}
+              description={book.description}
+              onUpdateBook={updateBook}
+            />
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 };
 

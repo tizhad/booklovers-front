@@ -1,8 +1,6 @@
 ## :pushpin: BookLovers
 
-:green_book: BookLovers is an app where you can find your favourite books, added them in your book shelves, read it and keep in track your progress.
-
-This project retrieved from Goodreads with less features and different functions.
+:green_book: You can find your favorite books, add them to your bookshelves, read them and keep track of your progress with BookLovers.
 
 This product can help you:
 

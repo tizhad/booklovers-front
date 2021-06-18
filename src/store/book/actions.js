@@ -5,7 +5,6 @@ import { appLoading, appDoneLoading, setMessage } from "../appState/actions";
 
 export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
 export const SET_SUGGESTIONS_RESULTS = "SET_SUGGESTIONS_RESULTS";
-export const SET_RANDOM_BOOKS = "SET_RANDOM_BOOKS";
 
 export const searchBooks = (searchTerm) => {
   return async (dispatch, getState) => {
@@ -76,7 +75,7 @@ export const createBook = (bookInfo) => {
     }
   };
 };
-
+// book suggestions based on user's books categories
 export const getSuggestions = () => {
   return async (dispatch, getState) => {
     const token = selectToken(getState());

@@ -1,8 +1,17 @@
 import "./Book.css";
 import React from "react";
 import { useState } from "react";
-// import ShowMore from "react-show-more";
-import { Button, ProgressBar, Card, FormControl } from "react-bootstrap";
+// import { Button, ProgressBar, Card, FormControl } from "react-bootstrap";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import LinearProgress, {
+  LinearProgressProps,
+} from "@mui/material/LinearProgress";
+import { TextField } from "@mui/material";
 
 export default function Book(props) {
   const [newProgress, setNewProgress] = useState(props.progress);
@@ -68,60 +77,70 @@ export default function Book(props) {
   };
 
   return (
-    <Card className="h-100 my-2 shadow p-1 bg-grey ">
-      <Card.Img variant="top" src={props.imageURL} className="card-img-top" />
-      <Card.Body className="p-2 overflow-auto">
-        <Card.Text>{props.title}</Card.Text>
-        <Card.Text>By: {props.authors}</Card.Text>
-        <Card.Text>
-          Category:
+    <Card
+      className="card-style"
+      sx={{ maxWidth: 345, minWidth: 300 }}
+      sm={{ minWidth: 250 }}
+      md={{ minWidth: 250 }}
+    >
+      <CardMedia
+        sx={{ height: 140 }}
+        image={props.imageURL}
+        title={props.imageURL}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div" fontSize={16}>
+          {props.title}
+        </Typography>
+        <Typography gutterBottom variant="h5" component="div" fontSize={12}>
+          By: {props.authors}
+        </Typography>
+        <Typography gutterBottom variant="h5" component="div" fontSize={10}>
+          Category :
           {props.categories === undefined || props.categories === null
-            ? "Unknown"
+            ? " Unknown"
             : props.categories}
-        </Card.Text>
-
-        {props.progress >= 0 && props.progress !== null ? (
-          <ProgressBar now={props.progress} className="my-1"></ProgressBar>
-        ) : (
-          <p> </p>
-        )}
-        {props.status === "reading" ? (
-          <FormControl
-            placeholder="%"
+        </Typography>
+        <CardActions>
+          {props.status === undefined && (
+            <Button variant="outlined" onClick={addBook}>
+              Want to read
+            </Button>
+          )}
+          {props.status === "to-read" && (
+            <Button variant="outlined" onClick={startBook} size={"small"}>
+              Start reading
+            </Button>
+          )}
+        </CardActions>
+        {
+          props.progress >= 0 && props.progress !== null && <p>Need to fix</p>
+          // <LinearProgressWithLabel value={props.progress} />
+        }
+        {props.status === "reading" && (
+          <TextField
+            id="progress"
+            variant="outlined"
+            placeholder="update your progress"
             aria-label="progress"
             type="number"
+            size={"small"}
             onChange={(event) => setNewProgress(event.target.value)}
           />
-        ) : (
-          <p> </p>
         )}
-
-        {props.status === "reading" && (
-          <Button onClick={updateProgress} className="mx-1 my-2">
-            update{" "}
-          </Button>
-        )}
-
-        {props.status === undefined && (
-          <Button onClick={addBook} className="mx-1 my-2">
-            Want to read
-          </Button>
-        )}
-        {props.status === "to-read" && (
-          <Button onClick={startBook} className="mx-1 my-2">
-            Start reading
-          </Button>
-        )}
-
-        {props.status === "reading" && (
-          <Button onClick={finishBook} className="mx-1 my-2">
-            Finished!
-          </Button>
-        )}
-      </Card.Body>
+        <CardActions>
+          {props.status === "reading" && (
+            <Button variant="outlined" onClick={updateProgress} size={"small"}>
+              update
+            </Button>
+          )}
+          {props.status === "reading" && (
+            <Button variant="outlined" onClick={finishBook} size={"small"}>
+              Finished!
+            </Button>
+          )}
+        </CardActions>
+      </CardContent>
     </Card>
-    // <ShowMore lines={3} more="Show more" less="Show less" anchorClass="">
-    //   {props.description}
-    // </ShowMore>
   );
 }

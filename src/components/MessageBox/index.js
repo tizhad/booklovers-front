@@ -14,8 +14,8 @@ export default function MessageBox() {
     <Alert
       show={showMessage}
       variant={message.variant}
-      dismissible={message.dismissable}
-      onClose={message.dismissable ? () => dispatch(clearMessage()) : null}
+      dismissible={message.dismissible}
+      onClose={message.dismissible ? () => dispatch(clearMessage()) : null}
     >
       {message.text}
     </Alert>

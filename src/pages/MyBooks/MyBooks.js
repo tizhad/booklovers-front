@@ -6,10 +6,17 @@ import { getUserBooks } from "../../store/userBook/actions";
 import { createBook } from "../../store/book/actions";
 import Book from "../../components/Book/Book";
 import { Container, Row, Col } from "react-bootstrap";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { Box, Divider } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
 
 const MyBooks = () => {
   const dispatch = useDispatch();
   const userBooks = useSelector(selectUserBooks);
+  const theme = createTheme();
 
   //In-progress books
   const inProgressBooks = userBooks.filter((book) => {
@@ -17,7 +24,7 @@ const MyBooks = () => {
   });
 
   //Finished books
-  const FinishedBooks = userBooks.filter((book) => {
+  const finishedBooks = userBooks.filter((book) => {
     return book.status === "read";
   });
 
@@ -38,82 +45,86 @@ const MyBooks = () => {
   }
 
   return (
-    <Container>
-      <Row>
-        <h1 className="h-color">
-          You're reading {inProgressBooks.length} books
-        </h1>
-      </Row>
-      <Row className="g-2">
-        {inProgressBooks.map((book) => (
-          <Col md={4} lg={3} sm={6} xs={12} key={book.googleID}>
-            <Book
-              key={book.googleID}
-              categories={book.categories}
-              googleID={book.googleID}
-              title={book.title}
-              authors={book.author}
-              imageURL={book.imageURL}
-              status={book.status}
-              rate={book.rate}
-              progress={book.progress}
-              onUpdateBook={updateBook}
-            />
-          </Col>
-        ))}
-      </Row>
-      <Row>
-        <h2 className="h-color">You finished {FinishedBooks.length} books </h2>
-      </Row>
-      <Row className="g-2">
-        {FinishedBooks.map((book) => (
-          <Col md={4} lg={3} sm={6} xs={12} key={book.googleID}>
-            <Book
-              key={book.googleID}
-              googleID={book.googleID}
-              categories={book.categories}
-              title={book.title}
-              authors={book.author}
-              imageURL={book.imageURL}
-              rate={book.rate}
-              status={book.status}
-              progress={book.progress}
-              description={book.description}
-              onUpdateBook={updateBook}
-            />
-          </Col>
-        ))}
-      </Row>
-      <Row>
-        <h1 className="h-color">{notStarted.length} books for starting.</h1>
-      </Row>
-      <Row className="g-2">
-        {notStarted.map((book) => (
-          <Col
-            md={4}
-            lg={3}
-            sm={6}
-            xs={12}
-            key={book.googleID}
-            className="my-1"
-          >
-            <Book
-              key={book.googleID}
-              googleID={book.googleID}
-              categories={book.categories}
-              title={book.title}
-              authors={book.author}
-              imageURL={book.imageURL}
-              rate={book.rate}
-              status={book.status}
-              progress={book.progress}
-              description={book.description}
-              onUpdateBook={updateBook}
-            />
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <main>
+        {/* Hero unit */}
+        <Box
+          sx={{
+            bgcolor: "background.paper",
+            pt: 8,
+            pb: 6,
+          }}
+        >
+          <Container maxwidth="lg">
+            <Typography variant="h5" align="center" color="#3D4B5B">
+              “The more that you read, the more things you will know. The more
+              that you learn, the more places you’ll go.” ― Dr. Seuss, I Can
+              Read With My Eyes Shut!
+            </Typography>
+            <Stack
+              sx={{ pt: 4 }}
+              direction="row"
+              spacing={2}
+              justifyContent="center"
+            ></Stack>
+          </Container>
+        </Box>
+        <Container sx={{ py: 8 }} maxwidth="md">
+          <h6 className="mb-4">In Progress</h6>
+          <Grid container spacing={4} sx={{ mb: 8 }}>
+            {inProgressBooks.map((book) => (
+              <Book
+                key={book.googleID}
+                categories={book.categories}
+                googleID={book.googleID}
+                title={book.title}
+                authors={book.author}
+                imageURL={book.imageURL}
+                status={book.status}
+                rate={book.rate}
+                progress={book.progress}
+                onUpdateBook={updateBook}
+              />
+            ))}
+          </Grid>
+          <h6 className="mb-4">Want To Read</h6>
+          <Grid container spacing={4} sx={{ mb: 8 }}>
+            {notStarted.map((book) => (
+              <Book
+                key={book.googleID}
+                categories={book.categories}
+                googleID={book.googleID}
+                title={book.title}
+                authors={book.author}
+                imageURL={book.imageURL}
+                status={book.status}
+                rate={book.rate}
+                progress={book.progress}
+                onUpdateBook={updateBook}
+              />
+            ))}
+          </Grid>
+          <h6 className="mb-4">Finished</h6>
+          <Grid container spacing={4} sx={{ mb: 8 }}>
+            {finishedBooks.map((book) => (
+              <Book
+                key={book.googleID}
+                categories={book.categories}
+                googleID={book.googleID}
+                title={book.title}
+                authors={book.author}
+                imageURL={book.imageURL}
+                status={book.status}
+                rate={book.rate}
+                progress={book.progress}
+                onUpdateBook={updateBook}
+              />
+            ))}
+          </Grid>
+        </Container>
+      </main>
+    </ThemeProvider>
   );
 };
 

@@ -8,10 +8,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import LinearProgress, {
-  LinearProgressProps,
-} from "@mui/material/LinearProgress";
 import { TextField } from "@mui/material";
+import { ProgressBar } from "react-bootstrap";
 
 export default function Book(props) {
   const [newProgress, setNewProgress] = useState(props.progress);
@@ -113,16 +111,14 @@ export default function Book(props) {
             </Button>
           )}
         </CardActions>
-        {
-          props.progress >= 0 && props.progress !== null && <p>Need to fix</p>
-          // <LinearProgressWithLabel value={props.progress} />
-        }
+        {props.progress >= 0 &&
+          props.progress !== null &&
+          props.progress !== 100 && <ProgressBar now={props.progress} />}
         {props.status === "reading" && (
           <TextField
-            id="progress"
-            variant="outlined"
-            placeholder="update your progress"
-            aria-label="progress"
+            id="standard-basic"
+            label="progress"
+            variant="standard"
             type="number"
             size={"small"}
             onChange={(event) => setNewProgress(event.target.value)}

@@ -1,3 +1,6 @@
 .card-style{
-    margin-left: 30px;
+    margin: 8px;
+}
+.card-style :hover {
+    cursor: pointer;
 }

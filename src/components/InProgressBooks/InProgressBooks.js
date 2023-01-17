@@ -7,7 +7,7 @@ const InProgressBooks = ({ books, updateBook }) => {
   return (
     <>
       <h6 className="mb-4">In Progress</h6>
-      <Grid container spacing={4}>
+      <Grid container spacing={3}>
         {inProgressBooks.map((book) => (
           <Book
             key={book.googleID}

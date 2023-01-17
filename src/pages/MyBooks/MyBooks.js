@@ -15,35 +15,31 @@ import NotStartedBooks from "../../components/NotStartedBooks/NotStartedBooks";
 const MyBooks = () => {
   const dispatch = useDispatch();
   const userBooks = useSelector(selectUserBooks);
-  console.log(userBooks, "users books");
   const theme = createTheme();
-  const updateBook = useCallback(
-    (book) => {
-      dispatch(createBook(book));
+  async function updateBook(book) {
+    await dispatch(createBook(book));
+    await dispatch(getUserBooks());
+  }
+
+  useEffect(
+    (userBooks) => {
       dispatch(getUserBooks());
     },
     [dispatch]
   );
-
-  useEffect(() => {
-    dispatch(getUserBooks());
-  }, [dispatch]);
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <main>
-        <Typography variant="h5" align="center" color="textSecondary">
-          “The more that you read, the more things you will know. The more that
-          you learn, the more places you’ll go.” ― Dr. Seuss, I Can Read With My
-          Eyes Shut!
-        </Typography>
-        <Container sx={{ py: 8 }} maxwidth="md">
-          <InProgressBooks books={userBooks} updateBook={updateBook} />
-          <FinishedBooks books={userBooks} updateBook={updateBook} />
-          <NotStartedBooks books={userBooks} updateBook={updateBook} />
-        </Container>
-      </main>
+      <Typography variant="h6" align="center" className="quote" mt={4} ml={50}>
+        “The more that you read, the more things you will know. The more that
+        you learn, the more places you’ll go.” ― Dr. Seuss, I Can Read With My
+        Eyes Shut!
+      </Typography>
+      <Container sx={{ py: 8 }}>
+        <InProgressBooks books={userBooks} updateBook={updateBook} />
+        <FinishedBooks books={userBooks} updateBook={updateBook} />
+        <NotStartedBooks books={userBooks} updateBook={updateBook} />
+      </Container>
     </ThemeProvider>
   );
 };

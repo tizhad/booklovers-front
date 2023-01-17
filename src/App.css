@@ -1,3 +1,8 @@
 body {
     padding: 8px;
 }
+.quote {
+    color: #ff8b88;
+    width: 300px;
+    font-size: 10px;
+}

@@ -5,14 +5,7 @@ import { useState } from "react";
 import Book from "../../components/Book/Book";
 import { createBook, searchBooks } from "../../store/book/actions";
 import { selectSearchResult } from "../../store/book/selectors";
-import {
-  Row,
-  Col,
-  Container,
-  Jumbotron,
-  InputGroup,
-  FormControl,
-} from "react-bootstrap";
+import { Row, Col, Container, InputGroup, FormControl } from "react-bootstrap";
 
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -41,13 +34,8 @@ export default function SearchPage() {
 
   return (
     <Container>
-      <Jumbotron>
-        <Container className="my-5 header">
-          <h1>Go ahead, hover over search</h1>
-        </Container>
-      </Jumbotron>
       <Row className="py-3">
-        <Col md={6}>
+        <Col md={4}>
           <InputGroup className="mb-3">
             <FormControl
               placeholder="search"
@@ -63,14 +51,7 @@ export default function SearchPage() {
       <Row className="g-3">
         {searchResults.map((book) => {
           return (
-            <Col
-              md={4}
-              lg={3}
-              sm={6}
-              xs={12}
-              className="my-1"
-              key={book.googleID}
-            >
+            <Col className="my-1" key={book.googleID}>
               <Book
                 googleID={book.googleID}
                 categories={book.categories}

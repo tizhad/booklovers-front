@@ -87,13 +87,13 @@ export default function Book(props) {
         title={props.imageURL}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div" fontSize={16}>
+        <Typography gutterBottom variant="h5" fontSize={12}>
           {props.title}
         </Typography>
-        <Typography gutterBottom variant="h5" component="div" fontSize={12}>
+        <Typography gutterBottom variant="h5" fontSize={12}>
           By: {props.authors}
         </Typography>
-        <Typography gutterBottom variant="h5" component="div" fontSize={10}>
+        <Typography gutterBottom variant="h5" component="div" fontSize={12}>
           Category :
           {props.categories === undefined || props.categories === null
             ? " Unknown"

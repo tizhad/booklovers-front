@@ -2,7 +2,8 @@ body {
     padding: 8px;
 }
 .quote {
-    color: #ff8b88;
-    width: 300px;
-    font-size: 10px;
+    color: #453de3;
+    font-style: italic;
+    font-family: fantasy;
+    text-shadow: #FC0 1px 0 10px;
 }

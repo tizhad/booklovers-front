@@ -1,67 +1,54 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserBooks } from "../../store/userBook/actions";
-import { getSuggestions } from "../../store/book/actions";
-import { selectUserBooks } from "../../store/userBook/selectors";
-import { selectSuggestions } from "../../store/book/selectors";
-import { createBook } from "../../store/book/actions";
+import { apiUrl } from "../../config/constants";
 import Book from "../../components/Book/Book";
+import { Col, Container } from "react-bootstrap";
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const userBooks = useSelector(selectUserBooks);
-  const suggestions = useSelector(selectSuggestions);
+  const [data, setData] = useState();
 
-  const inProgressBooks = userBooks.filter((book) => {
-    return book.status === "reading";
-  });
-  // GEt books and suggestions after every render
-  useEffect(
-    (userBooks) => {
-      dispatch(getUserBooks());
-      dispatch(getSuggestions());
-    },
-    [dispatch]
-  );
+  let errorMessage = "";
+  let result = null;
+  let books = [];
 
-  // Update a book
-  async function updateBook(book) {
-    await dispatch(createBook(book));
-    await dispatch(getUserBooks());
-  }
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
+  const fetchBooks = async () => {
+    await axios.get(`${apiUrl}/randomBooks`).then((response) => {
+      if (response.data.length > 0) {
+        randomBooks(books);
+      } else {
+        errorMessage = "error";
+      }
+    });
+  };
+
+  const randomBooks = (response) => {
+    console.log(response, "random book callled");
+    books = response;
+  };
+
   return (
-    <div>
-      {inProgressBooks.map((book) => (
-        <Book
-          key={book.googleID}
-          googleID={book.googleID}
-          title={book.title}
-          authors={book.author}
-          imageURL={book.imageURL}
-          status={book.status}
-          rate={book.rate}
-          progress={book.progress}
-          categories={book.categories}
-          onUpdateBook={updateBook}
-        />
+    <Container>
+      {books.map((book) => (
+        <Col className="my-1" key={book.id}>
+          <Book
+            googleID={book.googleID}
+            categories={book.categories}
+            title={book.title}
+            authors={book.authors}
+            imageURL={book.imageURL}
+            rate={book.rate}
+            status={book.status}
+            description={book.description}
+          />
+        </Col>
       ))}
-      <h1>Book Lovers suggestions</h1>
-      {suggestions.map((book) => (
-        <Book
-          key={book.googleID}
-          googleID={book.googleID}
-          categories={book.categories}
-          title={book.title}
-          authors={book.authors}
-          imageURL={book.imageURL}
-          rate={book.rate}
-          status={book.status}
-          description={book.description}
-          onUpdateBook={updateBook}
-        />
-      ))}
-    </div>
+    </Container>
   );
 };
 export default HomePage;

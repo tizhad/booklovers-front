@@ -3,12 +3,13 @@ import Grid from "@mui/material/Grid";
 import Book from "../Book/Book";
 
 const FinishedBooks = ({ books, updateBook }) => {
-  const inProgressBooks = books.filter((book) => book.status === "read");
+  const finishedBooks = books.filter((book) => book.status === "read");
+  if (!finishedBooks.length) return null;
   return (
     <>
       <h6 className="mb-4">Finished</h6>
       <Grid container spacing={3}>
-        {inProgressBooks.map((book) => (
+        {finishedBooks.map((book) => (
           <Book
             key={book.googleID}
             categories={book.categories}

@@ -1,12 +1,13 @@
 import React from "react";
-import Book from "../Book/Book";
 import Grid from "@mui/material/Grid";
+import Book from "../Book/Book";
 
 const InProgressBooks = ({ books, updateBook }) => {
   const inProgressBooks = books.filter((book) => book.status === "reading");
+  if (!inProgressBooks.length) return null;
   return (
     <>
-      <h6 className="mb-4">In Progress</h6>
+      <h6 className="mb-4">You are reading</h6>
       <Grid container spacing={3}>
         {inProgressBooks.map((book) => (
           <Book

@@ -17,12 +17,6 @@ export const getUserBooks = () => {
       dispatch(setUserBooks(res.data));
       dispatch(appDoneLoading());
     } catch (error) {
-      if (error.response) {
-        dispatch(setMessage("danger", true, error.response.data.message));
-      } else {
-        console.log(error.message);
-        dispatch(setMessage("danger", true, error.message));
-      }
       dispatch(appDoneLoading());
     }
   };

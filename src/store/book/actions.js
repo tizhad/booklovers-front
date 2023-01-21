@@ -5,6 +5,7 @@ import { appLoading, appDoneLoading, setMessage } from "../appState/actions";
 
 export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
 export const SET_SUGGESTIONS_RESULTS = "SET_SUGGESTIONS_RESULTS";
+export const SET_RANDOM_BOOKS = "SET_RANDOM_BOOKS";
 
 export const searchBooks = (searchTerm) => {
   return async (dispatch, getState) => {
@@ -19,10 +20,25 @@ export const searchBooks = (searchTerm) => {
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
         dispatch(setMessage("danger", true, error.response.data.message));
       } else {
-        console.log(error.message);
+        dispatch(setMessage("danger", true, error.message));
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};
+export const getRandomBooks = () => {
+  return async (dispatch, getState) => {
+    dispatch(appLoading());
+    try {
+      const res = await axios.get(`${apiUrl}/randomBooks`);
+      dispatch(setRandomBooks(res.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        dispatch(setMessage("danger", true, error.response.data.message));
+      } else {
         dispatch(setMessage("danger", true, error.message));
       }
       dispatch(appDoneLoading());
@@ -38,13 +54,10 @@ export const getAllUserBooks = () => {
     try {
       const headers = { headers: { Authorization: `Bearer ${token}` } };
       const res = await axios.get(apiUrl, headers);
-      console.log("res.data:", res.data);
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
         dispatch(setMessage("danger", true, error.response.data.message));
       } else {
-        console.log(error.message);
         dispatch(setMessage("danger", true, error.message));
       }
       dispatch(appDoneLoading());
@@ -59,16 +72,12 @@ export const createBook = (bookInfo) => {
     dispatch(appLoading());
     try {
       const headers = { headers: { Authorization: `Bearer ${token}` } };
-
       await axios.post(`${apiUrl}/books`, bookInfo, headers);
-
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
         dispatch(setMessage("danger", true, error.response.data.message));
       } else {
-        console.log(error.message);
         dispatch(setMessage("danger", true, error.message));
       }
       dispatch(appDoneLoading());
@@ -79,7 +88,6 @@ export const createBook = (bookInfo) => {
 export const getSuggestions = () => {
   return async (dispatch, getState) => {
     const token = selectToken(getState());
-
     dispatch(appLoading());
     try {
       const headers = { headers: { Authorization: `Bearer ${token}` } };
@@ -89,17 +97,14 @@ export const getSuggestions = () => {
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
         dispatch(setMessage("danger", true, error.response.data.message));
       } else {
-        console.log(error.message);
         dispatch(setMessage("danger", true, error.message));
       }
       dispatch(appDoneLoading());
     }
   };
 };
-
 const setSuggestionsResults = (suggestionsResults) => {
   return {
     type: SET_SUGGESTIONS_RESULTS,
@@ -111,5 +116,12 @@ const setSearchResults = (searchResults) => {
   return {
     type: SET_SEARCH_RESULTS,
     payload: searchResults,
+  };
+};
+
+const setRandomBooks = (randomBooks) => {
+  return {
+    type: SET_RANDOM_BOOKS,
+    payload: randomBooks,
   };
 };

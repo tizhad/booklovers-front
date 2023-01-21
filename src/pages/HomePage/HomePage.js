@@ -1,53 +1,40 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { apiUrl } from "../../config/constants";
 import Book from "../../components/Book/Book";
-import { Col, Container } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
+import { selectRandomBooks } from "../../store/book/selectors";
+import { getRandomBooks } from "../../store/book/actions";
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const [data, setData] = useState();
+  const randomBooks = useSelector(selectRandomBooks)
 
-  let errorMessage = "";
-  let result = null;
-  let books = [];
+  useEffect(
+      () => {
+        dispatch(getRandomBooks());
+      },
+      [dispatch]
+  );
 
-  useEffect(() => {
-    fetchBooks();
-  }, []);
-
-  const fetchBooks = async () => {
-    await axios.get(`${apiUrl}/randomBooks`).then((response) => {
-      if (response.data.length > 0) {
-        randomBooks(books);
-      } else {
-        errorMessage = "error";
-      }
-    });
-  };
-
-  const randomBooks = (response) => {
-    console.log(response, "random book callled");
-    books = response;
-  };
 
   return (
     <Container>
-      {books.map((book) => (
+        <Row className="g-3">
+      {randomBooks.map((book) => (
         <Col className="my-1" key={book.id}>
           <Book
-            googleID={book.googleID}
+            googleID={book.id}
             categories={book.categories}
-            title={book.title}
-            authors={book.authors}
-            imageURL={book.imageURL}
+            title={book.volumeInfo.title}
+            authors={book.volumeInfo.authors[0]}
+            imageURL={book.volumeInfo.imageLinks.smallThumbnail}
             rate={book.rate}
             status={book.status}
-            description={book.description}
+            description={book.volumeInfo.description}
           />
         </Col>
       ))}
+        </Row>
     </Container>
   );
 };

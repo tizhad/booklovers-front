@@ -11,6 +11,10 @@ import InProgressBooks from "../../components/InProgressBooks/InProgressBooks";
 import { Container } from "@mui/material";
 import FinishedBooks from "../../components/FinishedBooks/FinishedBooks";
 import NotStartedBooks from "../../components/NotStartedBooks/NotStartedBooks";
+import Book from "../../components/Book/Book";
+import { Col } from "react-bootstrap";
+
+
 
 const MyBooks = () => {
   const dispatch = useDispatch();
@@ -22,26 +26,31 @@ const MyBooks = () => {
   }
 
   useEffect(
-    (userBooks) => {
+    () => {
+        if (!userBooks) {
+            dispatch(getRandomBooks)
+        }
       dispatch(getUserBooks());
     },
     [dispatch]
   );
-  return (
-    <ThemeProvider theme={theme}>
-      {userBooks == undefined ? (
-        <>
-          <span variant="h4" align="center" mt={3}>
+  if (!userBooks.length) return (
+      <>
+              <span variant="h4" align="center" mt={3} className="alert alert-danger" role="alert">
             {" "}
-            You don't have any book, Please add by clicking on search button!
+                You don't have any book, Please add by clicking on search button!
           </span>
-          <Typography variant="h5" align="center" className="quote" mt={4}>
-            “The more that you read, the more things you will know. The more
-            that you learn, the more places you’ll go.” ― Dr. Seuss, I Can Read
-            With My Eyes Shut!
-          </Typography>
-        </>
-      ) : (
+        <Typography variant="h5" align="center" className="quote" mt={4}>
+          “The more that you read, the more things you will know. The more
+          that you learn, the more places you’ll go.” ― Dr. Seuss, I Can Read
+          With My Eyes Shut!
+        </Typography>
+      </>
+
+  );
+  return (
+      <>
+        <ThemeProvider theme={theme}>
         <Container sx={{ py: 8 }}>
           <InProgressBooks books={userBooks} updateBook={updateBook} />
           <FinishedBooks books={userBooks} updateBook={updateBook} />
@@ -49,6 +58,7 @@ const MyBooks = () => {
         </Container>
       )}
     </ThemeProvider>
+      </>
   );
 };
 

@@ -17,6 +17,7 @@ export const getUserBooks = () => {
       dispatch(setUserBooks(res.data));
       dispatch(appDoneLoading());
     } catch (error) {
+      dispatch(setMessage('Some thing went wrong. Please try again!'))
       dispatch(appDoneLoading());
     }
   };

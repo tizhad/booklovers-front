@@ -52,7 +52,7 @@ export const signUp = (name, email, password) => {
   };
 };
 
-export const login = (email, password         ) => {
+export const login = (email, password ) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
@@ -97,11 +97,7 @@ export const getUserWithStoredToken = () => {
       dispatch(tokenStillValid(response.data));
       dispatch(appDoneLoading());
     } catch (error) {
-      if (error.response) {
-        console.log(error.response.message);
-      } else {
-        console.log(error);
-      }
+      dispatch(setMessage(error.response));
       // if we get a 4xx or 5xx response,
       // get rid of the token by logging out
       dispatch(logOut());

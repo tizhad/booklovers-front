@@ -6,8 +6,8 @@ import NotStartedBooks from './NotStartedBooks';
 describe('<NotStartedBooks />', () => {
   test('it should mount', () => {
     render(<NotStartedBooks />);
-    
-    const notStartedBooks = screen.getByTestId('NotStartedBooks');
+
+    const notStartedBooks = screen.getElementsByClassName("mb-4");
 
     expect(notStartedBooks).toBeInTheDocument();
   });

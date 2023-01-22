@@ -5,14 +5,11 @@ import { selectUserBooks } from "../../store/userBook/selectors";
 import { getUserBooks } from "../../store/userBook/actions";
 import { createBook } from "../../store/book/actions";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import InProgressBooks from "../../components/InProgressBooks/InProgressBooks";
 import { Container } from "@mui/material";
 import FinishedBooks from "../../components/FinishedBooks/FinishedBooks";
 import NotStartedBooks from "../../components/NotStartedBooks/NotStartedBooks";
-import Book from "../../components/Book/Book";
-import { Col } from "react-bootstrap";
 
 
 
@@ -27,9 +24,6 @@ const MyBooks = () => {
 
   useEffect(
     () => {
-        if (!userBooks) {
-            dispatch(getRandomBooks)
-        }
       dispatch(getUserBooks());
     },
     [dispatch]
